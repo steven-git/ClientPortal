@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Marketing 2 Marketers Client Portal</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+	google.load("feeds", "1");
+
+    function initialize() {
+      var feed = new google.feeds.Feed("http://blog.case.edu/news/feed.atom");
+      feed.load(function(result) {
+      	console.log(result);
+        if (!result.error) {
+          var container = document.getElementById("feed");
+          for (var i = 0; i < result.feed.entries.length; i++) {
+            var entry = result.feed.entries[i];
+            var div = document.createElement("div");
+            div.appendChild(document.createTextNode(entry.title));
+            container.appendChild(div);
+          }
+        }
+      });
+    }
+    google.setOnLoadCallback(initialize);
+    </script>
+  </head>
+  <body>
+
+<div class="container-fluid">
+
+<div id="feed"></div>
+
+	<div class="text-center top3"><img src="http://clientportal.marketing2marketers.info/AdShop/ClientPortal/ClientPortalImages/M2M-Logo-NoFont_Small.jpg" alt="M2M Logo"></div>
+	
+	<div class="row top2">
+		<div class="col-md-8 col-md-offset-2">
+			<div class="box green-box">
+				<div class="green-box-title">
+					<p class="text-center white-text">You</p>
+				</div>
+			</div>
+
+			<div class="box purple-box">
+				<div class="purple-box-title">
+					<p class="text-center white-text">You</p>
+				</div>
+			</div>
+
+			<div class="box gray-box">
+				<div class="gray-box-title">
+					<p class="text-center white-text">You</p>
+				</div>
+			</div>
+
+			<div class="box blue-box">
+				<div class="blue-box-title">
+					<p class="text-center white-text">You</p>
+				</div>
+			</div>
+		</div>
+	</div> <!-- Closing Row -->
+
+	<div class="row top1">
+		<div class="col-md-8 col-md-offset-2">
+			<div class="box red-box">
+				<div class="red-box-title">
+					<p class="text-center white-text">You</p>
+				</div>
+			</div>
+
+			<div class="box yellow-box">
+				<div class="yellow-box-title">
+					<p class="text-center white-text">You</p>
+				</div>
+			</div>
+
+			<div class="box blue-box">
+				<div class="blue-box-title">
+					<p class="text-center white-text">You</p>
+				</div>
+			</div>
+
+			<div class="box red-box">
+				<div class="red-box-title">
+					<p class="text-center white-text">You</p>
+				</div>
+			</div>
+		</div>
+
+	</div> <!-- Closing Row -->
+
+	
+	
+</div> <!-- Container Fluid Closing -->
+
+
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+  </body>
+</html>
