@@ -6,28 +6,31 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
     <link rel='stylesheet' href='/stylesheets/style.css' />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-    <script type="text/javascript">
-	google.load("feeds", "1");
 
-    function initialize() {
-      var feed = new google.feeds.Feed("http://blog.case.edu/news/feed.atom");
-      feed.load(function(result) {
-      	console.log(result);
-        if (!result.error) {
-          var container = document.getElementById("feed");
-          for (var i = 0; i < result.feed.entries.length; i++) {
-            var entry = result.feed.entries[i];
-            var div = document.createElement("div");
-            div.appendChild(document.createTextNode(entry.title));
-            container.appendChild(div);
-          }
-        }
-      });
-    }
-    google.setOnLoadCallback(initialize);
-    </script>
-  </head>
+<script type="text/javascript">
+
+	$(document).ready(function(){
+		$.get('/feed', function(data){
+			console.log(data);
+
+			var xmlDoc = $.parseXML(data);
+			console.log("xmlDoc = " + xmlDoc);
+
+			var xml = $(xmlDoc);
+			console.log("xml = " + xml);
+
+			var title = xml.find('title');
+			console.log("title = " + title);
+
+			$('#feed').html(data);
+
+		}); // Closing .get
+
+	}); // Closing document ready
+
+</script>
+
+</head>
   <body>
 
 <div class="container-fluid">
