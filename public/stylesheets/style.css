@@ -1,5 +1,5 @@
 body {background-color: #fff; font-size: 12px;}
-a {color: #00B7FF;}
+a {color: #000;}
 .top1 { margin-top:1%; }
 .top2 { margin-top:2%; }
 .top3 { margin-top:3%; }
@@ -22,3 +22,5 @@ a {color: #00B7FF;}
 .red-box-title{border: 2px solid #F00; background-color:#F00;}
 .yellow-box-title{border: 2px solid #FC0; background-color:#FC0;}
 .white-text{color: #fff;}
+.feed {background-color: #fff; height: 120px; overflow-y: scroll;}
+.entryfeed{margin-bottom: 10px;}

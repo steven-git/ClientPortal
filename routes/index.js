@@ -13,20 +13,49 @@ router.get('/feed', function(req, res, next) {
 		if(!error){
 			//console.log(body);
 			$ = cheerio.load(body);
+			//console.log($('feed').find($('entry')).length + 4); // All children of feed. currently 16
 
 			var entryArray = [];
+
 			$('feed').filter(function(){
 
+				for(var i = 5; i <= $('feed').find($('entry')).length + 4; i++){
 					entryArray.push({
-						'date': $(this).children().eq(7).children().eq(5).text()
-					});
+						'entry': $(this).children().eq(i).html()
+					});	
+				}
 	
 			});
 
-
-			res.json(entryArray);
+			//console.log(entryArray);
+			res.json(entryArray); //entryArray sends all entry divs children
 		}
 	}).auth('steve@marketing2marketers.com', 'dchampizhere2432', false);
 });
+
+router.get('/news', function(req, res, next) {
+	request.get('http://marketing2marketers.curatasite.com/articles/featured/', function(error, response, body){
+		if(!error){
+			$ = cheerio.load(body);
+			var newsArray = [];
+
+			var lth = $('ol:nth-child(3)').children().length - 1;
+
+			$('ol:nth-child(3)').filter(function(){
+				for(var i = 0; i <= lth; i++){
+					newsArray.push({
+						'headline': $(this).children().eq(i).children().eq(0).children().eq(0).html().replace(/^\s+|\s+$|\s+(?=\s)/g, ''),
+						'snippet': $(this).children().eq(i).children().eq(0).children().eq(2).children().eq(1).text().replace(/^\s+|\s+$|\s+(?=\s)/g, '')
+					});	
+						// this > ol - children > li(Array) - eq(0) > li[0] - children > article(Array) - eq(0) > article[0] - children > innerhtml article - eq(0) > h3 title
+				}
+			});
+
+			console.log(newsArray);
+			res.json(newsArray); //newsArray sends all entry divs children
+		}
+	});
+});
+
 
 module.exports = router;
