@@ -24,3 +24,4 @@ a {color: #000;}
 .white-text{color: #fff;}
 .feed {background-color: #fff; height: 120px; overflow-y: scroll;}
 .entryfeed{margin-bottom: 10px;}
+.newsfeed{color: #ff3030; font-weight: bold; }

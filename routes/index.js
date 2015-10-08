@@ -57,5 +57,50 @@ router.get('/news', function(req, res, next) {
 	});
 });
 
+router.get('/projects', function(req, res, next) {
+	var username = new Buffer("steve@marketing2marketers.com").toString();
+	var password = new Buffer("dchampizhere2432").toString();
+
+	var options = {
+		url: 'https://basecamp.com',
+		port: 443,
+		path: '/2707120/',
+		//authentication headers
+		auth:{
+			user: username,
+			pass: password
+		}
+
+	};
+
+	request(options, function(err, res, html){
+		if(err){
+			console.log(err);
+			return
+		}
+
+		//console.log(html);
+		$ = cheerio.load(html);
+			//console.log($('feed').find($('entry')).length + 4); // All children of feed. currently 16
+
+			var entryArray = [];
+
+			$('body').filter(function(){
+
+				//for(var i = 5; i <= $('feed').find($('entry')).length + 4; i++){
+					entryArray.push({
+						'entry': $(this).html()
+					});	
+				//}
+	
+			});
+			console.log(entryArray);
+			//res.json(entryArray);
+	});
+
+
+});
+
+
 
 module.exports = router;
