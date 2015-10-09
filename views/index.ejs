@@ -46,7 +46,11 @@
 		}); // Closing .get
 
 		$.get('/projects', function(projects){
-			console.log(projects); //17 news stories
+			var projectObject = JSON.parse(projects);
+			for(var i = 0; i <= projectObject.length; i++){
+				$('#projects').append("<div class=\"projectfeed\"><p>" + projectObject[i].name + "</p><br /><a href=\"" + projectObject[i].app_url + "\">" + projectObject[i].app_url + "</a>");
+			}
+			console.log(projectObject); //17 news stories
 			
 		}); // Closing .get
 
@@ -107,6 +111,9 @@
 			<div class="box yellow-box">
 				<div class="yellow-box-title">
 					<p class="text-center white-text">Projects</p>
+					<div id="projects" class="feed">
+
+					</div>
 				</div>
 			</div>
 
