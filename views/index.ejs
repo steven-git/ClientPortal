@@ -12,21 +12,11 @@
 
 	$(document).ready(function(){
 		$.get('/feed', function(data){
-			//console.log(data); // Shows 6 Objects 
-			//console.log(JSON.stringify(data)); //Shows One large Text of all objects
 
-			var newArray = JSON.stringify(data).replace(/<id>(.*?)<\/id>|<published>(.*?)<\/published>|(T\d.............)|&lt;span class=&quot;suffix&quot;&gt;:&lt;\/span&gt;/g, '').replace(/title|updated/g, 'div').replace(/<link rel=\\"alternate\\" type=\\"text\/html\\"/g, '<a');
-
-			var newArray = JSON.parse(newArray); // Parses back into objects from text
-
-			//console.log(newArray.length); // Shows 11 
-			//console.log(newArray); // Shows 11 Objects 0-10
-
+			var newArray = JSON.parse(data); // Parses back into objects from text
+			console.log(newArray);
 			for(var i = 0; i <= newArray.length - 1; i++){
-				var newHtml = "";
-				newHtml += newArray[i].entry + '</a>';
-				//console.log(newHtml);
-				$('#feed').append("<div class=\"entryfeed\">" + newHtml + "</div>" );
+				$('#feed').append("<div>" + newArray[i].creator.name +  " "  + newArray[i].summary + "</div><br /><div>" + newArray[i].excerpt + "</div>");
 			}
 
 		}); // Closing .get
@@ -47,12 +37,25 @@
 
 		$.get('/projects', function(projects){
 			var projectObject = JSON.parse(projects);
-			for(var i = 0; i <= projectObject.length; i++){
-				$('#projects').append("<div class=\"projectfeed\"><p>" + projectObject[i].name + "</p><br /><a href=\"" + projectObject[i].app_url + "\">" + projectObject[i].app_url + "</a>");
+			for(var i = 0; i <= projectObject.length - 1; i++){
+				$('#projects').append("<div class=\"projectfeed\"><p>" + projectObject[i].name + "</p><a href=\"" + projectObject[i].app_url + "\">" + projectObject[i].app_url + "</a></div><br />");
 			}
-			console.log(projectObject); //17 news stories
+			//console.log(projectObject); 
 			
 		}); // Closing .get
+
+		$.get('/calendar', function(calendar){
+			var calendarObject = JSON.parse(calendar);
+			for(var i = 0; i <= calendarObject.length - 1; i++){
+				$('#calendar').append("<div><p>" + calendarObject[i].starts_at + "</p></div><div><p>Created By: " + calendarObject[i].creator.name + " </p></div><div><p>" + calendarObject[i].summary + "</p></div><div><a href=\"" + calendarObject[i].app_url + "\">" + calendarObject[i].app_url + "</a></div><br />");
+			}
+			//console.log(calendarObject); 
+			
+		}); // Closing .get
+
+
+
+
 
 	}); // Closing document ready
 
@@ -105,6 +108,9 @@
 			<div class="box red-box">
 				<div class="red-box-title">
 					<p class="text-center white-text">Calander</p>
+					<div id="calendar" class="feed">
+
+					</div>
 				</div>
 			</div>
 
